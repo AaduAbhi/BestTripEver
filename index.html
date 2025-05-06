@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Magical Haridwar Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffbe76;
+            --dark: #2d3436;
+            --light: #f7f1e3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #dfe6f0 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            animation: float-element 15s linear infinite;
+        }
+        
+        @keyframes float-element {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,107,107,0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        /* Memory Cards */
+        .memory-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+        
+        .memory-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardEntrance 0.8s ease forwards;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .memory-card:nth-child(1) { animation-delay: 0.8s; }
+        .memory-card:nth-child(2) { animation-delay: 1s; }
+        .memory-card:nth-child(3) { animation-delay: 1.2s; }
+        .memory-card:nth-child(4) { animation-delay: 1.4s; }
+        .memory-card:nth-child(5) { animation-delay: 1.6s; }
+        
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        .memory-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .card-date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+        
+        .card-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-heart {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .card-heart:hover {
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+        
+        /* Surprise Section */
+        .surprise-section {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            margin: 2rem 0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .surprise-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,190,118,0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+            z-index: -1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        
+        .surprise-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .surprise-text {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+        
+        .surprise-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .surprise-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255,107,107,0.4);
+        }
+        
+        .surprise-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .surprise-btn:hover::after {
+            opacity: 1;
+        }
+        
+        .surprise-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .surprise-result {
+            margin-top: 2rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .love-letter {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: none;
+        }
+        
+        .love-letter.show {
+            display: block;
+            transform: scale(1);
+        }
+        
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ff6b6b" fill-opacity="0.05" d="M30,20 Q50,10 70,20 Q90,30 80,50 Q70,70 50,80 Q30,70 20,50 Q10,30 30,20 Z"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .love-letter-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .love-letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .love-letter-text {
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        /* Photo Gallery */
+        .gallery-section {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            height: 250px;
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1) 0%, rgba(78,205,196,0.1) 100%);
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ff6b6b" fill-opacity="0.05" d="M30,20 Q50,10 70,20 Q90,30 80,50 Q70,70 50,80 Q30,70 20,50 Q10,30 30,20 Z"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-text {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+        
+        .heart-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .heart-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(255,107,107,0.4);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Floating Hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart-float {
+            position: absolute;
+            color: var(--primary);
+            font-size: 20px;
+            animation: float-up 6s ease-in forwards;
+            opacity: 0;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            animation: confetti-fall 5s linear forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 1;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .memory-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements Background -->
+    <div class="floating-elements" id="floating-elements"></div>
+    
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <h1 class="title">Our Haridwar Love Story</h1>
+        <p class="subtitle">Every moment with you becomes my most treasured memory</p>
+    </header>
+    
+    <!-- Memory Cards -->
+    <div class="memory-container">
+        <div class="memory-card">
+            <div class="card-image">
+                <img src="bus ka time.jpg" alt="Bus Ride">
+            </div>
+            <div class="card-content">
+                <div class="card-heart">❤️</div>
+                <h3 class="card-title">The Bus Ride Hug</h3>
+                <span class="card-date">Our Journey Begins</span>
+                <p class="card-text">That magical moment when we hugged in the bus, and the whole world disappeared. I could feel your heartbeat against mine, and in that instant, nothing else mattered.</p>
+            </div>
+        </div>
+        
+        <div class="memory-card">
+            <div class="card-image">
+                <img src="hatho mai hath.jpg" alt="Hotel Stay">
+            </div>
+            <div class="card-content">
+                <div class="card-heart">❤️</div>
+                <h3 class="card-title">Our Hotel Stay</h3>
+                <span class="card-date">Night of Togetherness</span>
+                <p class="card-text">Falling asleep in your arms and waking up to your beautiful face was like a dream come true. Those quiet moments of just being together meant everything to me.</p>
+            </div>
+        </div>
+        
+        <div class="memory-card">
+            <div class="card-image">
+                <img src="ghat mai per.jpg" alt="Ghats">
+            </div>
+            <div class="card-content">
+                <div class="card-heart">❤️</div>
+                <h3 class="card-title">By the Holy Ghats</h3>
+                <span class="card-date">Peaceful Moments</span>
+                <p class="card-text">Sitting by the ghats with our feet in the water, sharing our deepest thoughts - those were the moments when I felt our souls truly connected.</p>
+            </div>
+        </div>
+        
+        <div class="memory-card">
+            <div class="card-image">
+                <img src="ghat par hath.jpg" alt="Pictures">
+            </div>
+            <div class="card-content">
+                <div class="card-heart">❤️</div>
+                <h3 class="card-title">Captured Memories</h3>
+                <span class="card-date">Frozen in Time</span>
+                <p class="card-text">Every photo we took captures not just our smiles but the love we share. I look at them when I miss you and relive those perfect moments all over again.</p>
+            </div>
+        </div>
+        
+        <div class="memory-card">
+            <div class="card-image">
+                <img src="river ka view.jpg" alt="Sunset">
+            </div>
+            <div class="card-content">
+                <div class="card-heart">❤️</div>
+                <h3 class="card-title">Haridwar Sunsets</h3>
+                <span class="card-date">Golden Moments</span>
+                <p class="card-text">Watching the sunset over the Ganges with you by my side made me realize that the most beautiful views are the ones we share together.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Surprise Section -->
+    <div class="surprise-section">
+        <h2 class="surprise-title">Special Surprises For You</h2>
+        <p class="surprise-text">Click the button below to reveal sweet messages and surprises that come straight from my heart</p>
+        
+        <button class="surprise-btn" id="surprise-btn">
+            <span>Click for a Surprise</span>
+        </button>
+        
+        <div class="surprise-result" id="surprise-result">
+            <div class="love-letter" id="love-letter">
+                <div class="love-letter-content">
+                    <h3 class="love-letter-title">My Dearest Love</h3>
+                    <p class="love-letter-text">
+                        From the moment we hugged in the bus to the peaceful evenings by the ghats, every second in Haridwar with you was magical. 
+                        Your laughter is my favorite melody, and your smile lights up my world. 
+                        I cherish every memory we created there and can't wait for countless more adventures with you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Photo Gallery -->
+    <div class="gallery-section">
+        <h2 class="gallery-title">Our Gallery of Love</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="bus ka time.jpg" alt="Memory 1">
+            </div>
+            <div class="gallery-item">
+                <img src="ghat par hath.jpg" alt="Memory 2">
+            </div>
+            <div class="gallery-item">
+                <img src="hatho mai hath.jpg" alt="Memory 3">
+            </div>
+            <div class="gallery-item">
+                <img src="ghat mai per.jpg" alt="Memory 4">
+            </div>
+            <div class="gallery-item">
+                <img src="ghat ka view.jpg" alt="Memory 5">
+            </div>
+            <div class="gallery-item">
+                <img src="pero ke nishaan.jpg" alt="Memory 6">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h2 class="footer-title">Forever Yours</h2>
+            <p class="footer-text">
+                This trip was just the beginning of our beautiful journey together. 
+                Every day with you is a blessing I cherish deeply.
+            </p>
+            <button class="heart-btn" id="final-surprise">❤️</button>
+        </div>
+    </footer>
+    
+    <script>
+        // Create floating elements background
+        const elements = ['❤️', '✨', '🌸', '💖', '🌙', '🌟'];
+        const floatingContainer = document.getElementById('floating-elements');
+        
+        for (let i = 0; i < 30; i++) {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+            element.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.top = Math.random() * 100 + 'vh';
+            element.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            element.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            element.style.animationDelay = Math.random() * 5 + 's';
+            floatingContainer.appendChild(element);
+        }
+        
+        // Floating hearts animation
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart-float');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        setInterval(createHearts, 500);
+        
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffbe76', '#a29bfe', '#74b9ff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Surprise button
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const loveLetter = document.getElementById('love-letter');
+        const messages = [
+            "Your smile makes my heart skip a beat every time",
+            "I fall in love with you more each day",
+            "Your happiness is my greatest joy",
+            "Being with you feels like home",
+            "Our Haridwar trip was magical because of you",
+            "I cherish every moment we spent together",
+            "You're the best thing that ever happened to me",
+            "I can't wait for our next adventure together"
+        ];
+        
+        let messageIndex = 0;
+        
+        surpriseBtn.addEventListener('click', function() {
+            if (!loveLetter.classList.contains('show')) {
+                // First click - show love letter
+                loveLetter.classList.add('show');
+                surpriseBtn.innerHTML = '<span>Next Surprise</span>';
+            } else {
+                // Subsequent clicks - show random messages
+                if (messageIndex < messages.length) {
+                    loveLetter.querySelector('.love-letter-text').textContent = messages[messageIndex];
+                    messageIndex++;
+                    
+                    // Create floating hearts
+                    for (let i = 0; i < 10; i++) {
+                        setTimeout(() => {
+                            createHearts();
+                        }, i * 200);
+                    }
+                    
+                    if (messageIndex === messages.length) {
+                        surpriseBtn.innerHTML = '<span>More Love Coming!</span>';
+                        createConfetti();
+                    }
+                } else {
+                    // All messages shown - create big confetti
+                    createConfetti();
+                    surpriseBtn.innerHTML = '<span>I Love You!</span>';
+                }
+            }
+        });
+        
+        // Final surprise button
+        const finalSurpriseBtn = document.getElementById('final-surprise');
+        finalSurpriseBtn.addEventListener('click', function() {
+            createConfetti();
+            
+            // Create lots of hearts
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createHearts();
+                }, i * 100);
+            }
+            
+            // Show final message
+            const loveLetter = document.createElement('div');
+            loveLetter.classList.add('love-letter', 'show');
+            loveLetter.innerHTML = `
+                <div class="love-letter-content">
+                    <h3 class="love-letter-title">To The Love of My Life</h3>
+                    <p class="love-letter-text">
+                        Haridwar was just the beginning. I promise to create countless more beautiful memories with you, 
+                        to hold your hand through every adventure, and to love you more with each passing day. 
+                        You're my everything.
+                    </p>
+                </div>
+            `;
+            document.getElementById('surprise-result').appendChild(loveLetter);
+            
+            // Scroll to surprise section
+            document.querySelector('.surprise-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Make heart buttons interactive
+        document.querySelectorAll('.card-heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.style.transform = 'scale(1.5)';
+                this.style.color = '#ff6b6b';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 500);
+                
+                // Create mini hearts
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const miniHeart = document.createElement('div');
+                        miniHeart.innerHTML = '❤️';
+                        miniHeart.style.position = 'absolute';
+                        miniHeart.style.left = heart.getBoundingClientRect().left + 'px';
+                        miniHeart.style.top = heart.getBoundingClientRect().top + 'px';
+                        miniHeart.style.fontSize = '15px';
+                        miniHeart.style.transform = 'scale(0)';
+                        miniHeart.style.transition = 'all 1s ease';
+                        miniHeart.style.zIndex = '1000';
+                        document.body.appendChild(miniHeart);
+                        
+                        setTimeout(() => {
+                            miniHeart.style.transform = 'scale(1) translate(' + 
+                                (Math.random() * 100 - 50) + 'px, ' + 
+                                (Math.random() * -100 - 50) + 'px)';
+                            miniHeart.style.opacity = '0';
+                        }, 10);
+                        
+                        setTimeout(() => {
+                            miniHeart.remove();
+                        }, 1000);
+                    }, i * 100);
+                }
+            });
+        });
+        
+        // Animate cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'cardEntrance 0.8s ease forwards';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.memory-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
